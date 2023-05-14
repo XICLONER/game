@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-int main()
+int directions()
 {
     char directions[] = {'w', 'W', 's', 'S', 'd', 'D', 'a', 'A'};
     char input;
@@ -34,4 +34,10 @@ int main()
     }
 
     cout << "please choose a character between (w,s,d,a) your fucking ( " << input << " ) is not between them\n";
+    return 0;
+}
+
+int main()
+{
+    directions();
 }
