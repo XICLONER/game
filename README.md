@@ -10,6 +10,5 @@ As I told in top ⬆️ you should move around to eat points ( it makes you grow
 - **cd** "to where your file exists"
 - **ls** (make sure your in right path)
 - **g++ -o** "write a name for campiled file" "write main file name with *.cc*
-- **./** (compiled file name)
+- **./** "compiled file name"
 - done!
-
