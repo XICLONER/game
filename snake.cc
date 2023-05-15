@@ -1,13 +1,10 @@
 #include <iostream>
 using namespace std;
 
-int directions()
+int directions(char input)
 {
-    char directions[] = {'w', 'W', 's', 'S', 'd', 'D', 'a', 'A'};
-    char input;
 
-    cout << "Which direction? (w , s , d , a):\n";
-    cin >> input;
+    char directions[] = {'w', 'W', 's', 'S', 'd', 'D', 'a', 'A'};
 
     if (input == directions[0] || input == directions[1])
     {
@@ -34,10 +31,18 @@ int directions()
     }
 
     cout << "please choose a character between (w,s,d,a) your fucking ( " << input << " ) is not between them\n";
+
     return 0;
 }
 
 int main()
 {
-    directions();
+    char input;
+
+    cout << "Which direction? (w , s , d , a):\n";
+    cin >> input;
+
+    directions(input);
+
+    return 0;
 }
