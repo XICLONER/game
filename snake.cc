@@ -1,4 +1,6 @@
 #include <iostream>
+#include <ncurses.h>
+
 using namespace std;
 
 int directions(char input)
@@ -8,39 +10,78 @@ int directions(char input)
 
     if (input == directions[0] || input == directions[1])
     {
-        cout << "Up\n";
+
+        move(9, 30);
+
+        printw(".");
+
+        refresh();
+
+        getch();
+
+        endwin();
+
         return 0;
     }
 
     if (input == directions[2] || input == directions[3])
     {
-        cout << "Down\n";
+        move(11, 30);
+
+        printw(".");
+
+        refresh();
+
+        getch();
+
+        endwin();
         return 0;
     }
 
     if (input == directions[4] || input == directions[5])
     {
-        cout << "Right\n";
+        move(10, 31);
+
+        printw(".");
+
+        refresh();
+
+        getch();
+
+        endwin();
         return 0;
     }
 
     if (input == directions[6] || input == directions[7])
     {
-        cout << "Left\n";
+        move(10, 29);
+
+        printw(".");
+
+        refresh();
+
+        getch();
+
+        endwin();
         return 0;
     }
 
-    cout << "please choose a character between (w,s,d,a) your fucking ( " << input << " ) is not between them\n";
-
+    cout << " please choose a character between (w,s,d,a) your fucking ( " << input << " ) is not between them.\n";
+    endwin();
     return 0;
 }
 
 int main()
 {
+    initscr();
+
     char input;
 
-    cout << "Which direction? (w , s , d , a):\n";
+    cout << "Which direction? (w , s , d , a):";
     cin >> input;
+
+    move(10, 30);
+    printw(".");
 
     directions(input);
 
