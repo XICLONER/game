@@ -3,6 +3,16 @@
 
 using namespace std;
 
+char character()
+{
+    char input;
+
+    cout << "Press a key to start:";
+    cin >> input;
+
+    return input;
+}
+
 int directions(char input)
 {
     int row = 10;
@@ -83,12 +93,9 @@ int main()
     noecho();
     cbreak();
 
-    char input;
+    char input = character();
     int row = 10;
     int col = 30;
-
-    cout << "Which direction? (w , s , d , a):";
-    cin >> input;
 
     move(row, col);
     printw(".");
