@@ -3,49 +3,139 @@
 
 using namespace std;
 
-int printUp(char input);
-int printDown(char input);
-int printRight(char input);
-int printLeft(char input);
-void errorWrongCharacter(char input);
-int checkInputDirection(char input);
+int getStartPointRowCordination();
+int getStartPointColCordination();
+void moveCurser(int row, int col);
+char getDirection();
+void printDirection(char direction, int row, int col);
+void printError();
+void printUp(int row, int col);
+void printDown(int row, int col);
+void printRight(int row, int col);
+void printLeft(int row, int col);
 
 int main()
 {
     initscr();
-    noecho();
-    cbreak();
 
-    char input;
-    int row = 10;
-    int col = 30;
+    char direction;
+    int row;
+    int col;
 
-    cout << "Press a key to start:";
-    cin >> input;
+    row = getStartPointRowCordination();
+    col = getStartPointColCordination();
 
-    move(row, col);
+    moveCurser(row, col);
+
     printw(".");
 
-    checkInputDirection(input);
-
-    return 0;
-}
-
-int printUp(char input)
-{
-    int row = 10;
-    int col = 30;
-
-    move(row - 1, col);
-    printw(".");
     refresh();
+
+    direction = getDirection();
+
+    printDirection(direction, row, col);
+
+    direction = getDirection();
+
+    printDirection(direction, row, col);
+
     getch();
+
     endwin();
 
     return 0;
 }
 
-int printDown(char input)
+int getStartPointRowCordination()
+{
+    return 15;
+}
+
+int getStartPointColCordination()
+{
+    return 35;
+}
+
+void moveCurser(int row, int col)
+{
+    move(row, col);
+}
+
+char getDirection()
+{
+    char direction;
+
+    cin >> direction;
+
+    return direction;
+}
+
+void printDirection(char direction, int row, int col)
+{
+    if (direction == 'w' || direction == 'W')
+    {
+        printUp(row, col);
+    }
+    else
+    {
+        if (direction == 's' || direction == 'S')
+        {
+            printDown(row, col);
+        }
+        else
+        {
+            if (direction == 'd' || direction == 'D')
+            {
+                printRight(row, col);
+            }
+            else
+            {
+                if (direction == 'a' || direction == 'A')
+                {
+                    printLeft(row, col);
+                }
+                else
+                {
+                    printError();
+                }
+            }
+        }
+    }
+}
+
+void printError()
+{
+    cout << "Wrong character! use thise keys (w.s.d.a)\n";
+}
+
+void printUp(int row, int col)
+{
+    moveCurser(row - 1, col);
+    printw(".");
+    refresh();
+}
+
+void printDown(int row, int col)
+{
+    moveCurser(row + 1, col);
+    printw(".");
+    refresh();
+}
+
+void printRight(int row, int col)
+{
+    moveCurser(row, col + 1);
+    printw(".");
+    refresh();
+}
+
+void printLeft(int row, int col)
+{
+    moveCurser(row, col - 1);
+    printw(".");
+    refresh();
+}
+/*int printDown(char character)
 {
     int row = 10;
     int col = 30;
@@ -59,7 +149,7 @@ int printDown(char input)
     return 0;
 }
 
-int printRight(char input)
+int printRight(char character)
 {
     int row = 10;
     int col = 30;
@@ -73,7 +163,7 @@ int printRight(char input)
     return 0;
 }
 
-int printLeft(char input)
+int printLeft(char character)
 {
     int row = 10;
     int col = 30;
@@ -87,40 +177,40 @@ int printLeft(char input)
     return 0;
 }
 
-void errorWrongCharacter(char input)
+void errorWrongCharacter(char character)
 {
-    cout << " please choose a character between (w,s,d,a) your fucking ( " << input << " ) is not between them.\n";
+    cout << " please choose a character between (w,s,d,a) your fucking ( " << character << " ) is not between them.\n";
 
     endwin();
 }
 
-int checkInputDirection(char input)
+int printDirection(char character)
 {
 
     char directions[] = {'w', 'W', 's', 'S', 'd', 'D', 'a', 'A'};
 
-    if (input == directions[0] || input == directions[1])
+    if (character == directions[0] || character == directions[1])
     {
 
-        printUp(input);
+        printUp(character);
     }
 
-    if (input == directions[2] || input == directions[3])
+    if (character == directions[2] || character == directions[3])
     {
-        printDown(input);
+        printDown(character);
     }
 
-    if (input == directions[4] || input == directions[5])
+    if (character == directions[4] || character == directions[5])
     {
-        printRight(input);
+        printRight(character);
     }
 
-    if (input == directions[6] || input == directions[7])
+    if (character == directions[6] || character == directions[7])
     {
-        printLeft(input);
+        printLeft(character);
     }
 
-    errorWrongCharacter(input);
+    errorWrongCharacter(character);
 
     return 0;
-}
+}*/
