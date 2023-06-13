@@ -3,16 +3,16 @@
 
 using namespace std;
 
-int getStartPointRowCordination();
-int getStartPointColCordination();
+int getStartPointRowCoordination();
+int getStartPointColCoordination();
 void moveCurser(int row, int col);
 char getDirection();
-void printDirection(char direction, int row, int col);
+void printDirection(char direction, int *row, int *col);
 void printError();
-void printUp(int row, int col);
-void printDown(int row, int col);
-void printRight(int row, int col);
-void printLeft(int row, int col);
+void printUp(int *row, int *col);
+void printDown(int *row, int *col);
+void printRight(int *row, int *col);
+void printLeft(int *row, int *col);
 
 int main()
 {
@@ -22,8 +22,8 @@ int main()
     int row;
     int col;
 
-    row = getStartPointRowCordination();
-    col = getStartPointColCordination();
+    row = getStartPointRowCoordination();
+    col = getStartPointColCoordination();
 
     moveCurser(row, col);
 
@@ -31,13 +31,12 @@ int main()
 
     refresh();
 
-    direction = getDirection();
+    while (true)
+    {
+        direction = getDirection();
 
-    printDirection(direction, row, col);
-
-    direction = getDirection();
-
-    printDirection(direction, row, col);
+        printDirection(direction, &row, &col);
+    }
 
     getch();
 
@@ -46,12 +45,12 @@ int main()
     return 0;
 }
 
-int getStartPointRowCordination()
+int getStartPointRowCoordination()
 {
     return 15;
 }
 
-int getStartPointColCordination()
+int getStartPointColCoordination()
 {
     return 35;
 }
@@ -70,7 +69,7 @@ char getDirection()
     return direction;
 }
 
-void printDirection(char direction, int row, int col)
+void printDirection(char direction, int *row, int *col)
 {
     if (direction == 'w' || direction == 'W')
     {
@@ -108,109 +107,34 @@ void printError()
     cout << "Wrong character! use thise keys (w.s.d.a)\n";
 }
 
-void printUp(int row, int col)
+void printUp(int *row, int *col)
 {
-    moveCurser(row - 1, col);
+    *row = *row - 1;
+    moveCurser(*row, *col);
     printw(".");
     refresh();
 }
 
-void printDown(int row, int col)
+void printDown(int *row, int *col)
 {
-    moveCurser(row + 1, col);
+    *row = *row + 1;
+    moveCurser(*row, *col);
     printw(".");
     refresh();
 }
 
-void printRight(int row, int col)
+void printRight(int *row, int *col)
 {
-    moveCurser(row, col + 1);
+    *col = *col + 1;
+    moveCurser(*row, *col);
     printw(".");
     refresh();
 }
 
-void printLeft(int row, int col)
+void printLeft(int *row, int *col)
 {
-    moveCurser(row, col - 1);
+    *col = *col - 1;
+    moveCurser(*row, *col);
     printw(".");
     refresh();
 }
-/*int printDown(char character)
-{
-    int row = 10;
-    int col = 30;
-
-    move(row + 1, col);
-    printw(".");
-    refresh();
-    getch();
-    endwin();
-
-    return 0;
-}
-
-int printRight(char character)
-{
-    int row = 10;
-    int col = 30;
-
-    move(row, col + 1);
-    printw(".");
-    refresh();
-    getch();
-    endwin();
-
-    return 0;
-}
-
-int printLeft(char character)
-{
-    int row = 10;
-    int col = 30;
-
-    move(row, col - 1);
-    printw(".");
-    refresh();
-    getch();
-    endwin();
-
-    return 0;
-}
-
-void errorWrongCharacter(char character)
-{
-    cout << " please choose a character between (w,s,d,a) your fucking ( " << character << " ) is not between them.\n";
-
-    endwin();
-}
-
-int printDirection(char character)
-{
-
-    char directions[] = {'w', 'W', 's', 'S', 'd', 'D', 'a', 'A'};
-
-    if (character == directions[0] || character == directions[1])
-    {
-
-        printUp(character);
-    }
-
-    if (character == directions[2] || character == directions[3])
-    {
-        printDown(character);
-    }
-
-    if (character == directions[4] || character == directions[5])
-    {
-        printRight(character);
-    }
-
-    if (character == directions[6] || character == directions[7])
-    {
-        printLeft(character);
-    }
-
-    errorWrongCharacter(character);
-
-    return 0;
-}*/
