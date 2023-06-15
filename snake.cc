@@ -8,7 +8,6 @@ int getStartPointColCoordination();
 void moveCurser(int row, int col);
 char getDirection();
 void printDirection(char direction, int *row, int *col);
-void printError();
 void printUp(int *row, int *col);
 void printDown(int *row, int *col);
 void printRight(int *row, int *col);
@@ -93,18 +92,9 @@ void printDirection(char direction, int *row, int *col)
                 {
                     printLeft(row, col);
                 }
-                else
-                {
-                    printError();
-                }
             }
         }
     }
-}
-
-void printError()
-{
-    cout << "Wrong character! use thise keys (w.s.d.a)\n";
 }
 
 void printUp(int *row, int *col)
