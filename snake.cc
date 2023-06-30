@@ -7,7 +7,7 @@ int getStartPointRowCoordination();
 int getStartPointColCoordination();
 void moveCurser(int row, int col);
 char getDirection();
-void printDirection(char direction, int *row, int *col);
+void printDirection(char direction, char *lastDirection, int *row, int *col);
 void printUp(int *row, int *col);
 void printDown(int *row, int *col);
 void printRight(int *row, int *col);
@@ -20,6 +20,9 @@ int main()
     char direction;
     int row;
     int col;
+    char lastDirection;
+
+    lastDirection = '7';
 
     row = getStartPointRowCoordination();
     col = getStartPointColCoordination();
@@ -32,9 +35,9 @@ int main()
 
     while (true)
     {
-        direction = getDirection();
 
-        printDirection(direction, &row, &col);
+        direction = getDirection();
+        printDirection(direction, &lastDirection, &row, &col);
     }
 
     getch();
@@ -68,29 +71,50 @@ char getDirection()
     return direction;
 }
 
-void printDirection(char direction, int *row, int *col)
+void printDirection(char direction, char *lastDirection, int *row, int *col)
 {
     if (direction == 'w' || direction == 'W')
     {
+        if (*lastDirection == 's' || *lastDirection == 'S')
+        {
+            return;
+        }
+
         printUp(row, col);
+        *lastDirection = direction;
     }
     else
     {
         if (direction == 's' || direction == 'S')
         {
+            if (*lastDirection == 'w' || *lastDirection == 'W')
+            {
+                return;
+            }
             printDown(row, col);
+            *lastDirection = direction;
         }
         else
         {
             if (direction == 'd' || direction == 'D')
             {
+                if (*lastDirection == 'a' || *lastDirection == 'A')
+                {
+                    return;
+                }
                 printRight(row, col);
+                *lastDirection = direction;
             }
             else
             {
                 if (direction == 'a' || direction == 'A')
                 {
+                    if (*lastDirection == 'd' || *lastDirection == 'D')
+                    {
+                        return;
+                    }
                     printLeft(row, col);
+                    *lastDirection = direction;
                 }
             }
         }
