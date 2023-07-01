@@ -1,5 +1,6 @@
 #include <iostream>
 #include <ncurses.h>
+#include <cstdlib>
 
 using namespace std;
 
@@ -21,12 +22,15 @@ int main()
     int row;
     int col;
     char lastDirection;
+    int randomRow;
+    int randomCol;
 
     lastDirection = '7';
 
     row = getStartPointRowCoordination();
     col = getStartPointColCoordination();
 
+    srand(time(0));
     moveCurser(row, col);
 
     printw(".");
@@ -38,6 +42,12 @@ int main()
 
         direction = getDirection();
         printDirection(direction, &lastDirection, &row, &col);
+
+        randomRow = (rand() % 50) + 1;
+        randomCol = (rand() % 150) + 1;
+
+        move(randomRow, randomCol);
+        printw("*");
     }
 
     getch();
