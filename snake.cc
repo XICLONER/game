@@ -8,7 +8,7 @@ int getStartPointRowCoordination();
 int getStartPointColCoordination();
 void moveCurser(int row, int col);
 char getDirection();
-void printDirection(char direction, char *lastDirection, int *row, int *col);
+void printDirection(char direction, char *lastDirection, int *row, int *col, int *randomRow, int *randomCol);
 void printUp(int *row, int *col);
 void printDown(int *row, int *col);
 void printRight(int *row, int *col);
@@ -25,12 +25,19 @@ int main()
     int randomRow;
     int randomCol;
 
+    srand(time(0));
+
+    randomRow = (rand() % 30) + 1;
+    randomCol = (rand() % 100) + 1;
+
+    move(randomRow, randomCol);
+    printw("*");
+
     lastDirection = '7';
 
     row = getStartPointRowCoordination();
     col = getStartPointColCoordination();
 
-    srand(time(0));
     moveCurser(row, col);
 
     printw(".");
@@ -39,15 +46,8 @@ int main()
 
     while (true)
     {
-
         direction = getDirection();
-        printDirection(direction, &lastDirection, &row, &col);
-
-        randomRow = (rand() % 50) + 1;
-        randomCol = (rand() % 150) + 1;
-
-        move(randomRow, randomCol);
-        printw("*");
+        printDirection(direction, &lastDirection, &row, &col, &randomRow, &randomCol);
     }
 
     getch();
@@ -81,7 +81,7 @@ char getDirection()
     return direction;
 }
 
-void printDirection(char direction, char *lastDirection, int *row, int *col)
+void printDirection(char direction, char *lastDirection, int *row, int *col, int *randomRow, int *randomCol)
 {
     if (direction == 'w' || direction == 'W')
     {
@@ -92,6 +92,15 @@ void printDirection(char direction, char *lastDirection, int *row, int *col)
 
         printUp(row, col);
         *lastDirection = direction;
+
+        while (*row == *randomRow && *col == *randomCol)
+        {
+            *randomRow = (rand() % 50) + 1;
+            *randomCol = (rand() % 150) + 1;
+
+            move(*randomRow, *randomCol);
+            printw("*");
+        }
     }
     else
     {
@@ -103,6 +112,15 @@ void printDirection(char direction, char *lastDirection, int *row, int *col)
             }
             printDown(row, col);
             *lastDirection = direction;
+
+            while (*row == *randomRow && *col == *randomCol)
+            {
+                *randomRow = (rand() % 50) + 1;
+                *randomCol = (rand() % 150) + 1;
+
+                move(*randomRow, *randomCol);
+                printw("*");
+            }
         }
         else
         {
@@ -114,6 +132,15 @@ void printDirection(char direction, char *lastDirection, int *row, int *col)
                 }
                 printRight(row, col);
                 *lastDirection = direction;
+
+                while (*row == *randomRow && *col == *randomCol)
+                {
+                    *randomRow = (rand() % 50) + 1;
+                    *randomCol = (rand() % 150) + 1;
+
+                    move(*randomRow, *randomCol);
+                    printw("*");
+                }
             }
             else
             {
@@ -125,6 +152,15 @@ void printDirection(char direction, char *lastDirection, int *row, int *col)
                     }
                     printLeft(row, col);
                     *lastDirection = direction;
+
+                    while (*row == *randomRow && *col == *randomCol)
+                    {
+                        *randomRow = (rand() % 50) + 1;
+                        *randomCol = (rand() % 150) + 1;
+
+                        move(*randomRow, *randomCol);
+                        printw("*");
+                    }
                 }
             }
         }
