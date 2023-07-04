@@ -93,7 +93,7 @@ void printDirection(char direction, char *lastDirection, int *row, int *col, int
         printUp(row, col);
         *lastDirection = direction;
 
-        while (*row == *randomRow && *col == *randomCol)
+        if (*row == *randomRow && *col == *randomCol)
         {
             *randomRow = (rand() % 50) + 1;
             *randomCol = (rand() % 150) + 1;
@@ -113,7 +113,7 @@ void printDirection(char direction, char *lastDirection, int *row, int *col, int
             printDown(row, col);
             *lastDirection = direction;
 
-            while (*row == *randomRow && *col == *randomCol)
+            if (*row == *randomRow && *col == *randomCol)
             {
                 *randomRow = (rand() % 50) + 1;
                 *randomCol = (rand() % 150) + 1;
@@ -133,7 +133,7 @@ void printDirection(char direction, char *lastDirection, int *row, int *col, int
                 printRight(row, col);
                 *lastDirection = direction;
 
-                while (*row == *randomRow && *col == *randomCol)
+                if (*row == *randomRow && *col == *randomCol)
                 {
                     *randomRow = (rand() % 50) + 1;
                     *randomCol = (rand() % 150) + 1;
@@ -153,7 +153,7 @@ void printDirection(char direction, char *lastDirection, int *row, int *col, int
                     printLeft(row, col);
                     *lastDirection = direction;
 
-                    while (*row == *randomRow && *col == *randomCol)
+                    if (*row == *randomRow && *col == *randomCol)
                     {
                         *randomRow = (rand() % 50) + 1;
                         *randomCol = (rand() % 150) + 1;
