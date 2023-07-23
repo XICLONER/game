@@ -8,11 +8,12 @@ int getStartPointRowCoordination();
 int getStartPointColCoordination();
 void moveCurser(int row, int col);
 char getDirection();
-void printDirection(char direction, char *lastDirection, int *row, int *col, int *randomRow, int *randomCol);
+void printDirection(char direction, char *lastDirection, int *row, int *col, int *randomRow, int *randomCol, int rowMax, int colMax);
 void printUp(int *row, int *col);
 void printDown(int *row, int *col);
 void printRight(int *row, int *col);
 void printLeft(int *row, int *col);
+void newRandomStar(int *row, int *col, int rowMax, int colMax);
 
 int main()
 {
@@ -24,11 +25,12 @@ int main()
     char lastDirection;
     int randomRow;
     int randomCol;
+    const int ROW_MAX = 30;
+    const int COL_MAX = 30;
 
     srand(time(0));
 
-    randomRow = (rand() % 30) + 1;
-    randomCol = (rand() % 100) + 1;
+    newRandomStar(&randomRow, &randomCol, ROW_MAX, COL_MAX);
 
     move(randomRow, randomCol);
     printw("*");
@@ -47,7 +49,7 @@ int main()
     while (true)
     {
         direction = getDirection();
-        printDirection(direction, &lastDirection, &row, &col, &randomRow, &randomCol);
+        printDirection(direction, &lastDirection, &row, &col, &randomRow, &randomCol, ROW_MAX, COL_MAX);
     }
 
     getch();
@@ -55,6 +57,12 @@ int main()
     endwin();
 
     return 0;
+}
+
+void newRandomStar(int *row, int *col, int rowMax, int colMax)
+{
+    *row = (rand() % rowMax) + 1;
+    *col = (rand() % colMax) + 1;
 }
 
 int getStartPointRowCoordination()
@@ -81,7 +89,7 @@ char getDirection()
     return direction;
 }
 
-void printDirection(char direction, char *lastDirection, int *row, int *col, int *randomRow, int *randomCol)
+void printDirection(char direction, char *lastDirection, int *row, int *col, int *randomRow, int *randomCol, int rowMax, int colMax)
 {
     if (direction == 'w' || direction == 'W')
     {
@@ -95,8 +103,7 @@ void printDirection(char direction, char *lastDirection, int *row, int *col, int
 
         if (*row == *randomRow && *col == *randomCol)
         {
-            *randomRow = (rand() % 50) + 1;
-            *randomCol = (rand() % 150) + 1;
+            newRandomStar(randomRow, randomCol, rowMax, colMax);
 
             move(*randomRow, *randomCol);
             printw("*");
@@ -115,8 +122,7 @@ void printDirection(char direction, char *lastDirection, int *row, int *col, int
 
             if (*row == *randomRow && *col == *randomCol)
             {
-                *randomRow = (rand() % 50) + 1;
-                *randomCol = (rand() % 150) + 1;
+                newRandomStar(randomRow, randomCol, rowMax, colMax);
 
                 move(*randomRow, *randomCol);
                 printw("*");
@@ -135,8 +141,7 @@ void printDirection(char direction, char *lastDirection, int *row, int *col, int
 
                 if (*row == *randomRow && *col == *randomCol)
                 {
-                    *randomRow = (rand() % 50) + 1;
-                    *randomCol = (rand() % 150) + 1;
+                    newRandomStar(randomRow, randomCol, rowMax, colMax);
 
                     move(*randomRow, *randomCol);
                     printw("*");
@@ -155,8 +160,7 @@ void printDirection(char direction, char *lastDirection, int *row, int *col, int
 
                     if (*row == *randomRow && *col == *randomCol)
                     {
-                        *randomRow = (rand() % 50) + 1;
-                        *randomCol = (rand() % 150) + 1;
+                        newRandomStar(randomRow, randomCol, rowMax, colMax);
 
                         move(*randomRow, *randomCol);
                         printw("*");
