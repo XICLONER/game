@@ -14,6 +14,10 @@ void printDown(int *row, int *col);
 void printRight(int *row, int *col);
 void printLeft(int *row, int *col);
 void newRandomStar(int *row, int *col, int rowMax, int colMax);
+void gameBorder(int starRowMax, int starColMax);
+void upOfBorder(int starRowMax);
+void leftAndRightOfBorder(int starColMax);
+void downOfBorder(int starRowMax);
 
 int main()
 {
@@ -25,8 +29,13 @@ int main()
     char lastDirection;
     int randomRow;
     int randomCol;
-    const int ROW_MAX = 30;
-    const int COL_MAX = 30;
+    const int ROW_MAX = 40;
+    const int COL_MAX = 20;
+
+    const int STAR_ROW_MAX = 50;
+    const int STAR_COL_MAX = 35;
+
+    gameBorder(STAR_ROW_MAX, STAR_COL_MAX);
 
     srand(time(0));
 
@@ -43,6 +52,11 @@ int main()
     moveCurser(row, col);
 
     printw(".");
+    printw(".");
+    printw(".");
+    printw(".");
+
+    move(row, col);
 
     refresh();
 
@@ -107,6 +121,8 @@ void printDirection(char direction, char *lastDirection, int *row, int *col, int
 
             move(*randomRow, *randomCol);
             printw("*");
+            move(*row, *col);
+            refresh();
         }
     }
     else
@@ -126,6 +142,8 @@ void printDirection(char direction, char *lastDirection, int *row, int *col, int
 
                 move(*randomRow, *randomCol);
                 printw("*");
+                move(*row, *col);
+                refresh();
             }
         }
         else
@@ -145,6 +163,8 @@ void printDirection(char direction, char *lastDirection, int *row, int *col, int
 
                     move(*randomRow, *randomCol);
                     printw("*");
+                    move(*row, *col);
+                    refresh();
                 }
             }
             else
@@ -164,6 +184,8 @@ void printDirection(char direction, char *lastDirection, int *row, int *col, int
 
                         move(*randomRow, *randomCol);
                         printw("*");
+                        move(*row, *col);
+                        refresh();
                     }
                 }
             }
@@ -176,6 +198,7 @@ void printUp(int *row, int *col)
     *row = *row - 1;
     moveCurser(*row, *col);
     printw(".");
+    move(*row, *col);
     refresh();
 }
 
@@ -184,6 +207,7 @@ void printDown(int *row, int *col)
     *row = *row + 1;
     moveCurser(*row, *col);
     printw(".");
+    move(*row, *col);
     refresh();
 }
 
@@ -192,6 +216,7 @@ void printRight(int *row, int *col)
     *col = *col + 1;
     moveCurser(*row, *col);
     printw(".");
+    move(*row, *col);
     refresh();
 }
 
@@ -200,5 +225,44 @@ void printLeft(int *row, int *col)
     *col = *col - 1;
     moveCurser(*row, *col);
     printw(".");
+    move(*row, *col);
     refresh();
+}
+
+void gameBorder(int starRowMax, int starColMax)
+{
+    upOfBorder(starRowMax);
+    leftAndRightOfBorder(starColMax);
+    downOfBorder(starRowMax);
+}
+
+void upOfBorder(int starRowMax)
+{
+      for (int row = 0; row < starRowMax; row++)
+    {
+        printw(". ");
+        refresh();
+    }
+}
+
+void leftAndRightOfBorder(int starColMax)
+{
+        printw("\n");
+     for (int col = 0; col < starColMax; col++)
+    {
+        printw(".");
+        printw("                                                                                                 ");
+        printw(".");
+        printw("\n");
+        refresh();
+    }
+}
+
+void downOfBorder(int starRowMax)
+{
+     for (int row = 0; row < starRowMax; row++)
+    {
+        printw(". ");
+        refresh();    
+    }   
 }
