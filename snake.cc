@@ -18,6 +18,7 @@ void drawGameBorder(int rowMax, int colMax);
 void upOfBorder(int rowMax);
 void leftAndRightOfBorder(int colMax, int rowMax);
 void downOfBorder(int rowMax);
+void printStar(int randomRow, int randomCol, int row, int col);
 
 int main()
 {
@@ -43,10 +44,7 @@ int main()
 
     makeRandomStarCoordination(&randomRow, &randomCol, ROW_MAX, COL_MAX);
 
-    move(randomRow, randomCol);
-    printw("*");
-    move(row, col);
-    refresh();
+    printStar(randomRow, randomCol, row, col);
 
     printw(".");   
 
@@ -106,10 +104,12 @@ void printDirection(char direction, char *lastDirection, int *row, int *col, int
         {
             makeRandomStarCoordination(randomRow, randomCol, rowMax, colMax);
 
-            move(*randomRow, *randomCol);
-            printw("*");
-            move(*row, *col);
-            refresh();
+            // move(*randomRow, *randomCol);
+            // printw("*");
+            // move(*row, *col);
+            // refresh();
+
+            printStar(*randomRow, *randomCol, *row, *col);
         }
     }
     else
@@ -127,10 +127,7 @@ void printDirection(char direction, char *lastDirection, int *row, int *col, int
             {
                 makeRandomStarCoordination(randomRow, randomCol, rowMax, colMax);
 
-                move(*randomRow, *randomCol);
-                printw("*");
-                move(*row, *col);
-                refresh();
+                printStar(*randomRow, *randomCol, *row, *col);
             }
         }
         else
@@ -148,10 +145,7 @@ void printDirection(char direction, char *lastDirection, int *row, int *col, int
                 {
                     makeRandomStarCoordination(randomRow, randomCol, rowMax, colMax);
 
-                    move(*randomRow, *randomCol);
-                    printw("*");
-                    move(*row, *col);
-                    refresh();
+                    printStar(*randomRow, *randomCol, *row, *col);
                 }
             }
             else
@@ -169,10 +163,7 @@ void printDirection(char direction, char *lastDirection, int *row, int *col, int
                     {
                         makeRandomStarCoordination(randomRow, randomCol, rowMax, colMax);
 
-                        move(*randomRow, *randomCol);
-                        printw("*");
-                        move(*row, *col);
-                        refresh();
+                        printStar(*randomRow, *randomCol, *row, *col);
                     }
                 }
             }
@@ -256,4 +247,12 @@ void downOfBorder(int rowMax)
     {
         printw(". ");
     }   
+}
+
+void printStar(int randomRow, int randomCol, int row, int col)
+{
+    move(randomRow, randomCol);
+    printw("*");
+    move(row, col);
+    refresh();
 }
