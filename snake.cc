@@ -104,11 +104,6 @@ void printDirection(char direction, char *lastDirection, int *row, int *col, int
         {
             makeRandomStarCoordination(randomRow, randomCol, rowMax, colMax);
 
-            // move(*randomRow, *randomCol);
-            // printw("*");
-            // move(*row, *col);
-            // refresh();
-
             printStar(*randomRow, *randomCol, *row, *col);
         }
     }
