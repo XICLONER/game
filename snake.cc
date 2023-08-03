@@ -7,7 +7,6 @@ using namespace std;
 
 int getStartPointRowCoordination();
 int getStartPointColCoordination();
-void moveCurser(int row, int col);
 char getDirection();
 void printDirection(char direction, char *lastDirection, int *row, int *col, int *randomRow, int *randomCol, int rowMax, int colMax);
 void printUp(int *row, int *col);
@@ -46,7 +45,7 @@ int main()
 
     move(randomRow, randomCol);
     printw("*");
-    moveCurser(row, col);
+    move(row, col);
     refresh();
 
     printw(".");   
@@ -80,11 +79,6 @@ int getStartPointRowCoordination()
 int getStartPointColCoordination()
 {
     return 35;
-}
-
-void moveCurser(int row, int col)
-{
-    move(row, col);
 }
 
 char getDirection()
@@ -189,7 +183,7 @@ void printDirection(char direction, char *lastDirection, int *row, int *col, int
 void printUp(int *row, int *col)
 {
     *row = *row - 1;
-    moveCurser(*row, *col);
+    move(*row, *col);
     printw(".");
     move(*row, *col);
     refresh();
@@ -198,7 +192,7 @@ void printUp(int *row, int *col)
 void printDown(int *row, int *col)
 {
     *row = *row + 1;
-    moveCurser(*row, *col);
+    move(*row, *col);
     printw(".");
     move(*row, *col);
     refresh();
@@ -207,7 +201,7 @@ void printDown(int *row, int *col)
 void printRight(int *row, int *col)
 {
     *col = *col + 1;
-    moveCurser(*row, *col);
+    move(*row, *col);
     printw(".");
     move(*row, *col);
     refresh();
@@ -216,7 +210,7 @@ void printRight(int *row, int *col)
 void printLeft(int *row, int *col)
 {
     *col = *col - 1;
-    moveCurser(*row, *col);
+    move(*row, *col);
     printw(".");
     move(*row, *col);
     refresh();
