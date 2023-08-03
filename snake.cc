@@ -7,7 +7,6 @@ using namespace std;
 
 int getStartPointRowCoordination();
 int getStartPointColCoordination();
-void moveCurser(int row, int col);
 char getDirection();
 void printDirection(char direction, char *lastDirection, int *row, int *col, int *randomRow, int *randomCol, int rowMax, int colMax);
 void printUp(int *row, int *col);
@@ -19,6 +18,7 @@ void drawGameBorder(int rowMax, int colMax);
 void upOfBorder(int rowMax);
 void leftAndRightOfBorder(int colMax, int rowMax);
 void downOfBorder(int rowMax);
+void printStar(int randomRow, int randomCol, int row, int col);
 
 int main()
 {
@@ -44,10 +44,7 @@ int main()
 
     makeRandomStarCoordination(&randomRow, &randomCol, ROW_MAX, COL_MAX);
 
-    move(randomRow, randomCol);
-    printw("*");
-    moveCurser(row, col);
-    refresh();
+    printStar(randomRow, randomCol, row, col);
 
     printw(".");   
 
@@ -82,11 +79,6 @@ int getStartPointColCoordination()
     return 35;
 }
 
-void moveCurser(int row, int col)
-{
-    move(row, col);
-}
-
 char getDirection()
 {
     char direction;
@@ -112,10 +104,7 @@ void printDirection(char direction, char *lastDirection, int *row, int *col, int
         {
             makeRandomStarCoordination(randomRow, randomCol, rowMax, colMax);
 
-            move(*randomRow, *randomCol);
-            printw("*");
-            move(*row, *col);
-            refresh();
+            printStar(*randomRow, *randomCol, *row, *col);
         }
     }
     else
@@ -133,10 +122,7 @@ void printDirection(char direction, char *lastDirection, int *row, int *col, int
             {
                 makeRandomStarCoordination(randomRow, randomCol, rowMax, colMax);
 
-                move(*randomRow, *randomCol);
-                printw("*");
-                move(*row, *col);
-                refresh();
+                printStar(*randomRow, *randomCol, *row, *col);
             }
         }
         else
@@ -154,10 +140,7 @@ void printDirection(char direction, char *lastDirection, int *row, int *col, int
                 {
                     makeRandomStarCoordination(randomRow, randomCol, rowMax, colMax);
 
-                    move(*randomRow, *randomCol);
-                    printw("*");
-                    move(*row, *col);
-                    refresh();
+                    printStar(*randomRow, *randomCol, *row, *col);
                 }
             }
             else
@@ -175,10 +158,7 @@ void printDirection(char direction, char *lastDirection, int *row, int *col, int
                     {
                         makeRandomStarCoordination(randomRow, randomCol, rowMax, colMax);
 
-                        move(*randomRow, *randomCol);
-                        printw("*");
-                        move(*row, *col);
-                        refresh();
+                        printStar(*randomRow, *randomCol, *row, *col);
                     }
                 }
             }
@@ -189,7 +169,7 @@ void printDirection(char direction, char *lastDirection, int *row, int *col, int
 void printUp(int *row, int *col)
 {
     *row = *row - 1;
-    moveCurser(*row, *col);
+    move(*row, *col);
     printw(".");
     move(*row, *col);
     refresh();
@@ -198,7 +178,7 @@ void printUp(int *row, int *col)
 void printDown(int *row, int *col)
 {
     *row = *row + 1;
-    moveCurser(*row, *col);
+    move(*row, *col);
     printw(".");
     move(*row, *col);
     refresh();
@@ -207,7 +187,7 @@ void printDown(int *row, int *col)
 void printRight(int *row, int *col)
 {
     *col = *col + 1;
-    moveCurser(*row, *col);
+    move(*row, *col);
     printw(".");
     move(*row, *col);
     refresh();
@@ -216,7 +196,7 @@ void printRight(int *row, int *col)
 void printLeft(int *row, int *col)
 {
     *col = *col - 1;
-    moveCurser(*row, *col);
+    move(*row, *col);
     printw(".");
     move(*row, *col);
     refresh();
@@ -262,4 +242,12 @@ void downOfBorder(int rowMax)
     {
         printw(". ");
     }   
+}
+
+void printStar(int randomRow, int randomCol, int row, int col)
+{
+    move(randomRow, randomCol);
+    printw("*");
+    move(row, col);
+    refresh();
 }
