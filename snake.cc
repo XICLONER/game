@@ -1,6 +1,7 @@
 #include <iostream>
 #include <ncurses.h>
 #include <cstdlib>
+#include <stdlib.h>
 
 using namespace std;
 
@@ -13,11 +14,11 @@ void printUp(int *row, int *col);
 void printDown(int *row, int *col);
 void printRight(int *row, int *col);
 void printLeft(int *row, int *col);
-void newRandomStar(int *row, int *col, int rowMax, int colMax);
-void gameBorder(int starRowMax, int starColMax);
-void upOfBorder(int starRowMax);
-void leftAndRightOfBorder(int starColMax);
-void downOfBorder(int starRowMax);
+void makeRandomStarCoordination(int *row, int *col, int rowMax, int colMax);
+void drawGameBorder(int rowMax, int colMax);
+void upOfBorder(int rowMax);
+void leftAndRightOfBorder(int colMax, int rowMax);
+void downOfBorder(int rowMax);
 
 int main()
 {
@@ -29,37 +30,29 @@ int main()
     char lastDirection;
     int randomRow;
     int randomCol;
-    const int ROW_MAX = 40;
-    const int COL_MAX = 20;
+    const int ROW_MAX = 50;
+    const int COL_MAX = 35;
 
-    const int STAR_ROW_MAX = 50;
-    const int STAR_COL_MAX = 35;
-
-    gameBorder(STAR_ROW_MAX, STAR_COL_MAX);
+    drawGameBorder(ROW_MAX, COL_MAX);
 
     srand(time(0));
-
-    newRandomStar(&randomRow, &randomCol, ROW_MAX, COL_MAX);
-
-    move(randomRow, randomCol);
-    printw("*");
-
-    lastDirection = '7';
 
     row = getStartPointRowCoordination();
     col = getStartPointColCoordination();
 
+    lastDirection = '7';
+
+    makeRandomStarCoordination(&randomRow, &randomCol, ROW_MAX, COL_MAX);
+
+    move(randomRow, randomCol);
+    printw("*");
     moveCurser(row, col);
-
-    printw(".");
-    printw(".");
-    printw(".");
-    printw(".");
-
-    move(row, col);
-
     refresh();
 
+    printw(".");   
+
+    refresh();
+    
     while (true)
     {
         direction = getDirection();
@@ -73,7 +66,7 @@ int main()
     return 0;
 }
 
-void newRandomStar(int *row, int *col, int rowMax, int colMax)
+void makeRandomStarCoordination(int *row, int *col, int rowMax, int colMax)
 {
     *row = (rand() % rowMax) + 1;
     *col = (rand() % colMax) + 1;
@@ -117,7 +110,7 @@ void printDirection(char direction, char *lastDirection, int *row, int *col, int
 
         if (*row == *randomRow && *col == *randomCol)
         {
-            newRandomStar(randomRow, randomCol, rowMax, colMax);
+            makeRandomStarCoordination(randomRow, randomCol, rowMax, colMax);
 
             move(*randomRow, *randomCol);
             printw("*");
@@ -138,7 +131,7 @@ void printDirection(char direction, char *lastDirection, int *row, int *col, int
 
             if (*row == *randomRow && *col == *randomCol)
             {
-                newRandomStar(randomRow, randomCol, rowMax, colMax);
+                makeRandomStarCoordination(randomRow, randomCol, rowMax, colMax);
 
                 move(*randomRow, *randomCol);
                 printw("*");
@@ -159,7 +152,7 @@ void printDirection(char direction, char *lastDirection, int *row, int *col, int
 
                 if (*row == *randomRow && *col == *randomCol)
                 {
-                    newRandomStar(randomRow, randomCol, rowMax, colMax);
+                    makeRandomStarCoordination(randomRow, randomCol, rowMax, colMax);
 
                     move(*randomRow, *randomCol);
                     printw("*");
@@ -180,7 +173,7 @@ void printDirection(char direction, char *lastDirection, int *row, int *col, int
 
                     if (*row == *randomRow && *col == *randomCol)
                     {
-                        newRandomStar(randomRow, randomCol, rowMax, colMax);
+                        makeRandomStarCoordination(randomRow, randomCol, rowMax, colMax);
 
                         move(*randomRow, *randomCol);
                         printw("*");
@@ -229,40 +222,44 @@ void printLeft(int *row, int *col)
     refresh();
 }
 
-void gameBorder(int starRowMax, int starColMax)
+void drawGameBorder(int rowMax, int colMax)
 {
-    upOfBorder(starRowMax);
-    leftAndRightOfBorder(starColMax);
-    downOfBorder(starRowMax);
+    upOfBorder(rowMax);
+    leftAndRightOfBorder(colMax, rowMax);
+    downOfBorder(rowMax);
+    refresh();    
 }
 
-void upOfBorder(int starRowMax)
+void upOfBorder(int rowMax)
 {
-      for (int row = 0; row < starRowMax; row++)
+    for (int row = 0; row < rowMax; row++)
     {
         printw(". ");
-        refresh();
     }
 }
 
-void leftAndRightOfBorder(int starColMax)
+void leftAndRightOfBorder(int colMax, int rowMax)
 {
-        printw("\n");
-     for (int col = 0; col < starColMax; col++)
+    printw("\n");
+
+    for (int col = 0; col < colMax; col++)
     {
         printw(".");
-        printw("                                                                                                 ");
+       
+        for (int space = 0; space < rowMax * 2 - 3; space ++)
+        {
+            printw(" ");
+        }
+        
         printw(".");
         printw("\n");
-        refresh();
     }
 }
 
-void downOfBorder(int starRowMax)
+void downOfBorder(int rowMax)
 {
-     for (int row = 0; row < starRowMax; row++)
+    for (int row = 0; row < rowMax; row++)
     {
         printw(". ");
-        refresh();    
     }   
 }
