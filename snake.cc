@@ -30,7 +30,7 @@ int main()
     char lastDirection;
     int randomRow;
     int randomCol;
-    const int ROW_MAX = 100;
+    const int ROW_MAX = 50;
     const int COL_MAX = 35;
 
     drawGameBorder(ROW_MAX, COL_MAX);
@@ -214,7 +214,7 @@ void upOfBorder(int rowMax)
 {
     for (int row = 0; row < rowMax; row++)
     {
-        printw(".");
+        printw(". ");
     }
 }
 
@@ -226,7 +226,7 @@ void leftAndRightOfBorder(int colMax, int rowMax)
     {
         printw(".");
        
-        for (int space = 0; space < rowMax - 2; space ++)
+        for (int space = 0; space < rowMax * 2 - 3; space ++)
         {
             printw(" ");
         }
@@ -240,7 +240,7 @@ void downOfBorder(int rowMax)
 {
     for (int row = 0; row < rowMax; row++)
     {
-        printw(".");
+        printw(". ");
     }   
 }
 
